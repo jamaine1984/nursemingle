@@ -1,0 +1,102 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class CreatorsMonetizationPage extends StatelessWidget {
+  const CreatorsMonetizationPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Creators Monetization', style: GoogleFonts.urbanist(fontWeight: FontWeight.bold)),
+        elevation: 0,
+      ),
+      backgroundColor: Colors.grey[50],
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _planCard(
+              context,
+              title: 'Free Plan',
+              icon: Icons.lock_outline,
+              color: Colors.grey,
+              badge: 'No Access',
+              details: [
+                'No monetization access',
+                'Upgrade to earn from gifts and ads',
+              ],
+            ),
+            const SizedBox(height: 20),
+            _planCard(
+              context,
+              title: 'Starter Plan',
+              icon: Icons.star,
+              color: Colors.orange,
+              badge: '25% Earnings',
+              details: [
+                '25% of ad revenue during livestreams',
+                '25% of premium gifts received in livestreams',
+              ],
+            ),
+            const SizedBox(height: 20),
+            _planCard(
+              context,
+              title: 'Gold Plan',
+              icon: Icons.workspace_premium,
+              color: Colors.amber[800]!,
+              badge: '70% Earnings',
+              details: [
+                '70% of all ad revenue',
+                '70% of premium gifts',
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _planCard(BuildContext context, {required String title, required IconData icon, required Color color, required String badge, required List<String> details}) {
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(icon, color: color, size: 36),
+                const SizedBox(width: 16),
+                Text(title, style: GoogleFonts.urbanist(fontWeight: FontWeight.bold, fontSize: 22)),
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: color.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(badge, style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: color)),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            ...details.map((d) => Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  Icon(Icons.check_circle, color: color, size: 18),
+                  const SizedBox(width: 8),
+                  Expanded(child: Text(d, style: GoogleFonts.poppins(fontSize: 15))),
+                ],
+              ),
+            )),
+          ],
+        ),
+      ),
+    );
+  }
+} 

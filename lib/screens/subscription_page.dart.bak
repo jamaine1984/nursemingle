@@ -1,0 +1,196 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:nursemingle/providers/auth_provider.dart';
+import 'package:nursemingle/utils/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class SubscriptionPage extends StatelessWidget {
+  const SubscriptionPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
+    final currentPlan = authProvider.currentPlan;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Subscription Plans', style: GoogleFonts.urbanist(fontWeight: FontWeight.bold)),
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.onPrimary,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildPlanSection(
+              context,
+              plan: 'Free',
+              price: 'Free',
+              features: [
+                '20 likes per day',
+                '10 messages per day',
+                'View live streams',
+                'Access to free gifts (via ads)',
+                'Basic discovery filters',
+              ],
+              isCurrent: currentPlan == 'Free',
+              onUpgrade: () {},
+            ),
+            const SizedBox(height: 24),
+            _buildPlanSection(
+              context,
+              plan: 'Starter',
+              price: '	9.99/month',
+              features: [
+                '50 likes per day',
+                'Unlimited messages',
+                'Send/receive premium gifts',
+                'Full discovery filters',
+                'See who liked you',
+                'No ads',
+              ],
+              isCurrent: currentPlan == 'Starter',
+              onUpgrade: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Subscription upgrade not implemented yet.')),
+                );
+              },
+            ),
+            const SizedBox(height: 24),
+            _buildPlanSection(
+              context,
+              plan: 'Gold',
+              price: '	19.99/month',
+              features: [
+                'Unlimited likes',
+                'Unlimited messages',
+                '10 super likes per day',
+                'Send/receive all gifts',
+                'Priority support',
+                'See who liked you',
+                'No ads',
+                'Go live & video call',
+              ],
+              isCurrent: currentPlan == 'Gold',
+              onUpgrade: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Subscription upgrade not implemented yet.')),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPlanSection(
+    BuildContext context, {
+    required String plan,
+    required String price,
+    required List<String> features,
+    required bool isCurrent,
+    required VoidCallback onUpgrade,
+  }) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      elevation: 3,
+      color: plan == 'Gold'
+          ? const Color(0xFFFFF8E1)
+          : plan == 'Starter'
+              ? const Color(0xFFE3F2FD)
+              : Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  plan == 'Gold'
+                      ? Icons.workspace_premium
+                      : plan == 'Starter'
+                          ? Icons.star
+                          : Icons.lock_open,
+                  color: plan == 'Gold'
+                      ? Colors.amber[800]
+                      : plan == 'Starter'
+                          ? Colors.blue[700]
+                          : Colors.grey[600],
+                  size: 32,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  plan,
+                  style: GoogleFonts.urbanist(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: plan == 'Gold'
+                        ? Colors.amber[800]
+                        : plan == 'Starter'
+                            ? Colors.blue[700]
+                            : Colors.grey[800],
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  price,
+                  style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 14),
+            ...features.map((f) => Row(
+                  children: [
+                    const Icon(Icons.check, color: Colors.green, size: 18),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(f, style: GoogleFonts.poppins(fontSize: 15)),
+                    ),
+                  ],
+                )),
+            const SizedBox(height: 16),
+            if (!isCurrent)
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: onUpgrade,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: plan == 'Gold'
+                        ? Colors.amber[800]
+                        : plan == 'Starter'
+                            ? Colors.blue[700]
+                            : Colors.grey[600],
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  child: Text('Upgrade to $plan', style: GoogleFonts.urbanist(fontWeight: FontWeight.bold, fontSize: 16)),
+                ),
+              )
+            else
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: null,
+                  icon: const Icon(Icons.check_circle, color: Colors.green),
+                  label: const Text('Current Plan'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green[100],
+                    foregroundColor: Colors.green[800],
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+} 
