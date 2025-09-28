@@ -1,0 +1,78 @@
+{
+  "app": {
+    "name": "Nurse Mingle",
+    "tagline": "Conectando Héroes de la Salud",
+    "findLove": "Encontrar Amor"
+  },
+  "auth": {
+    "welcome": "Bienvenido a Nurse Mingle",
+    "createAccount": "Crear Cuenta",
+    "signIn": "Iniciar Sesión",
+    "email": "Email",
+    "password": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "signUp": "Registrarse",
+    "login": "Entrar",
+    "logout": "Cerrar Sesión",
+    "pleaseSignIn": "Por favor inicia sesión primero"
+  },
+  "profile": {
+    "setup": "Configuración de Perfil",
+    "fullName": "Nombre Completo",
+    "age": "Edad",
+    "specialty": "Especialidad de Enfermería",
+    "location": "Ubicación",
+    "about": "Acerca de Mí",
+    "interests": "Intereses",
+    "saveProfile": "Guardar Perfil",
+    "uploadPhoto": "Subir Foto",
+    "editProfile": "Editar Perfil"
+  },
+  "specialties": {
+    "icu": "UCI/Cuidados Críticos",
+    "emergency": "Emergencias/Trauma",
+    "pediatric": "Pediátrica",
+    "oncology": "Oncología",
+    "cardiac": "Cardiaca",
+    "maternity": "Maternidad/Parto",
+    "or": "Quirófano",
+    "anesthesia": "Anestesia",
+    "psychiatric": "Psiquiátrica/Salud Mental",
+    "geriatric": "Geriátrica",
+    "homeHealth": "Atención Domiciliaria",
+    "rehabilitation": "Rehabilitación",
+    "dialysis": "Diálisis",
+    "infection": "Control de Infecciones",
+    "other": "Otro"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "likes": "Me Gusta",
+    "messages": "Mensajes",
+    "speedDating": "Citas Rápidas",
+    "gifts": "Regalos",
+    "profile": "Perfil"
+  },
+  "matching": {
+    "like": "Me Gusta",
+    "pass": "Pasar",
+    "superLike": "Super Me Gusta",
+    "itsAMatch": "¡Es una Coincidencia!",
+    "startChatting": "Empezar a Chatear",
+    "keepSwiping": "Seguir Deslizando",
+    "noMoreProfiles": "¡No hay más perfiles para deslizar!",
+    "checkBackLater": "Vuelve más tarde para ver nuevas personas."
+  },
+  "common": {
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "yes": "Sí",
+    "no": "No",
+    "error": "Error",
+    "success": "Éxito"
+  }
+}

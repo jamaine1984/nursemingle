@@ -1,0 +1,78 @@
+{
+  "app": {
+    "name": "Nurse Mingle",
+    "tagline": "Connecter les Héros de la Santé",
+    "findLove": "Trouver l'Amour"
+  },
+  "auth": {
+    "welcome": "Bienvenue sur Nurse Mingle",
+    "createAccount": "Créer un Compte",
+    "signIn": "Se Connecter",
+    "email": "Email",
+    "password": "Mot de Passe",
+    "forgotPassword": "Mot de passe oublié?",
+    "signUp": "S'inscrire",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "pleaseSignIn": "Veuillez vous connecter d'abord"
+  },
+  "profile": {
+    "setup": "Configuration du Profil",
+    "fullName": "Nom Complet",
+    "age": "Âge",
+    "specialty": "Spécialité Infirmière",
+    "location": "Localisation",
+    "about": "À Propos de Moi",
+    "interests": "Intérêts",
+    "saveProfile": "Sauvegarder le Profil",
+    "uploadPhoto": "Télécharger une Photo",
+    "editProfile": "Modifier le Profil"
+  },
+  "specialties": {
+    "icu": "USI/Soins Critiques",
+    "emergency": "Urgences/Trauma",
+    "pediatric": "Pédiatrique",
+    "oncology": "Oncologie",
+    "cardiac": "Cardiaque",
+    "maternity": "Maternité/Accouchement",
+    "or": "Salle d'Opération",
+    "anesthesia": "Anesthésie",
+    "psychiatric": "Psychiatrique/Santé Mentale",
+    "geriatric": "Gériatrique",
+    "homeHealth": "Soins à Domicile",
+    "rehabilitation": "Réhabilitation",
+    "dialysis": "Dialyse",
+    "infection": "Contrôle des Infections",
+    "other": "Autre"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "likes": "J'aime",
+    "messages": "Messages",
+    "speedDating": "Rencontres Rapides",
+    "gifts": "Cadeaux",
+    "profile": "Profil"
+  },
+  "matching": {
+    "like": "J'aime",
+    "pass": "Passer",
+    "superLike": "Super J'aime",
+    "itsAMatch": "C'est un Match!",
+    "startChatting": "Commencer à Discuter",
+    "keepSwiping": "Continuer à Swiper",
+    "noMoreProfiles": "Plus de profils à swiper!",
+    "checkBackLater": "Revenez plus tard pour de nouvelles personnes."
+  },
+  "common": {
+    "loading": "Chargement...",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer",
+    "yes": "Oui",
+    "no": "Non",
+    "error": "Erreur",
+    "success": "Succès"
+  }
+}

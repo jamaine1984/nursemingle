@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "WebFetch(domain:docs.firebase.google.com)",
+      "WebFetch(domain:firebase.google.com)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Read(//c/Users/koike/Downloads/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

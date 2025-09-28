@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Nurse Mingle</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7587025688858323"
+     crossorigin="anonymous"></script>
+
+<script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.20.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <div id="root">
+    <div id="sparkle-container"></div>
+    <!-- ONBOARDING FLOW -->
+    <div id="welcome-container" class="welcome-bg">
+      <div class="stethoscope-bg"></div>
+      <h1>Nurse Mingle</h1>
+      <p class="welcome-subtitle">Connecting Healthcare Heroes</p>
+      <div class="lottie-container" id="lottie-container">
+        <div class="lottie-skeleton" aria-hidden="true">
+          <div class="skeleton-shimmer"></div>
+        </div>
+        <div id="css-animation" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 300px; height: 300px;">
+          <div class="medical-icon" style="font-size: 120px; animation: pulse 2s infinite; margin-bottom: 20px;">🩺</div>
+          <div class="connecting-text" style="font-size: 18px; color: #e91e63; font-weight: 600; animation: fadeInOut 3s infinite;">Connecting Healthcare Heroes</div>
+        </div>
+        <div class="lottie-error" id="lottie-error" style="display:none;">
+          <div class="fallback-icon">🏥</div>
+          <p>Healthcare connection</p>
+        </div>
+      </div>
+      <button id="goto-auth-btn">Find Love</button>
+    </div>
+
+    <div id="auth-container" class="hidden">
+      <div class="card">
+        <h2>Create Account or Sign In</h2>
+        <form id="auth-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="input" required placeholder="Enter your email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="input" required placeholder="Enter your password">
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-primary">Sign Up</button>
+            <button type="button" class="btn btn-secondary">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="profile-setup-container" class="hidden">
+      <div class="card">
+        <h2>Set Up Your Profile</h2>
+        <form id="profile-form">
+          <div class="avatar-uploader">
+            <label for="avatar-upload" class="avatar-label">
+              <img id="avatar-preview" src="data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='120' height='120' fill='%23ffffff'/%3E%3C/svg%3E" alt="Avatar preview">
+              <span>Upload Photo</span>
+            </label>
+            <input type="file" id="avatar-upload" accept="image/*" class="hidden-input">
+          </div>
+          <div class="form-group">
+              <label for="full-name">Full Name</label>
+              <input type="text" id="full-name" class="input" placeholder="e.g., Dr. Jessica Ray" required>
+          </div>
+          <div class="form-group">
+            <label for="about">About Me</label>
+            <textarea id="about" class="textarea" placeholder="Tell us a little about yourself..." rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="profile-prompt-1">My favorite way to de-stress after a 12-hour shift is...</label>
+            <input type="text" id="profile-prompt-1" class="input" placeholder="e.g., a good book and a cup of tea.">
+          </div>
+          <div class="form-group">
+            <div class="age-label">
+              <label for="age-slider">Age</label>
+              <span id="age-value">25</span>
+            </div>
+            <input type="range" id="age-slider" class="slider" min="18" max="99" value="25">
+          </div>
+          <div class="form-group">
+            <label for="specialty">Nursing Specialty</label>
+            <select id="specialty" class="input">
+                <option>Cardiology</option>
+                <option>Pediatrics</option>
+                <option>Emergency Room (ER)</option>
+                <option>Intensive Care (ICU)</option>
+                <option>Surgery</option>
+                <option>Oncology</option>
+                <option>General Practice</option>
+                <option>Anesthesia</option>
+                <option>Dermatology</option>
+                <option>Endocrinology</option>
+                <option>Gastroenterology</option>
+                <option>Geriatrics</option>
+                <option>Hematology</option>
+                <option>Infectious Disease</option>
+                <option>Mental Health/Psychiatry</option>
+                <option>Nephrology</option>
+                <option>Neurology</option>
+                <option>Obstetrics & Gynecology</option>
+                <option>Orthopedics</option>
+                <option>Palliative Care</option>
+                <option>Pulmonology</option>
+                <option>Radiology</option>
+                <option>Rehabilitation</option>
+                <option>Rheumatology</option>
+                <option>Transplant</option>
+                <option>Trauma</option>
+                <option>Urology</option>
+                <option>Wound Care</option>
+                <option>Home Health</option>
+                <option>School Nursing</option>
+                <option>Occupational Health</option>
+                <option>Flight Nursing</option>
+                <option>Certified Nursing Assistant (CNA)</option>
+                <option>Licensed Practical Nurse (LPN)</option>
+                <option>Nurse Practitioner (NP)</option>
+                <option>Clinical Nurse Specialist</option>
+                <option>Nurse Educator</option>
+                <option>Nurse Administrator</option>
+                <option>Other</option>
+            </select>
+          </div>
+           <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" class="input" placeholder="e.g., London, UK">
+          </div>
+          <div class="form-group">
+            <label>Interests</label>
+            <div class="interests-container">
+              <button type="button" class="interest-tag">Hiking</button>
+              <button type="button" class="interest-tag">Travel</button>
+              <button type="button" class="interest-tag">Cooking</button>
+              <button type="button" class="interest-tag">Movies</button>
+              <button type="button" class="interest-tag">Reading</button>
+              <button type="button" class="interest-tag">Fitness</button>
+              <button type="button" class="interest-tag">Music</button>
+              <button type="button" class="interest-tag">Art</button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Save & Start Mingling</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- MAIN APP SHELL -->
+    <div id="app-shell" class="hidden">
+      <header id="main-header">
+          <div class="logo">Nurse Mingle</div>
+          <div id="boost-timer" class="hidden"></div>
+          <div class="header-actions">
+            <button id="likes-you-btn" class="icon-btn" aria-label="Likes You">
+                <i class="fas fa-heart"></i>
+                <span id="likes-you-count" class="notification-count hidden"></span>
+            </button>
+            <button id="settings-button" class="icon-btn" aria-label="Settings">
+                <i class="fas fa-cog"></i>
+            </button>
+          </div>
+      </header>
+
+      <main id="main-content">
+        <!-- Home Page (Swipe & Match) -->
+        <div id="home-page" class="page">
+          <div id="swipe-deck">
+            <!-- Swipe cards will be dynamically inserted here -->
+          </div>
+          <div id="action-buttons">
+            <button class="action-btn" id="rewind-btn" aria-label="Rewind"><i class="fas fa-undo"></i></button>
+            <button class="action-btn" id="pass-btn" aria-label="Pass"><i class="fas fa-times"></i></button>
+            <button class="action-btn" id="super-like-btn" aria-label="Super Like"><i class="fas fa-star"></i></button>
+            <button class="action-btn" id="like-btn" aria-label="Like"><i class="fas fa-heart"></i></button>
+            <button class="action-btn" id="boost-btn" aria-label="Boost"><i class="fas fa-bolt"></i></button>
+          </div>
+        </div>
+
+        <!-- Speed Dating Page -->
+        <div id="speed-dating-page" class="page hidden">
+            <div class="page-header"><h2>Speed Dating</h2></div>
+            <!-- LOBBY VIEW -->
+            <div id="speed-dating-lobby" class="speed-dating-content">
+                <div class="lobby-header">
+                    <h3>Find a Room</h3>
+                    <p>Jump into a room to start a timed 1-on-1 video chat.</p>
+                </div>
+                <div id="speed-dating-rooms-grid" class="speed-dating-rooms-grid">
+                    <!-- Rooms will be dynamically inserted here -->
+                </div>
+            </div>
+            <!-- ROOM VIEW -->
+            <div id="speed-dating-room" class="speed-dating-content hidden">
+                <div class="speed-dating-timer" id="speed-dating-timer">00:00</div>
+                <div class="speed-dating-videos">
+                    <div class="video-container remote-video-container">
+                        <img src="https://images.pexels.com/photos/5206935/pexels-photo-5206935.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Remote user video">
+                        <div class="video-name-tag" id="remote-user-name">Chloe</div>
+                    </div>
+                    <div class="video-container local-video-container">
+                        <img src="https://placehold.co/400x300/E1E1E1/BDBDBD?text=You" alt="Local user video">
+                        <div class="video-name-tag">You</div>
+                    </div>
+                     <div id="speed-dating-status-overlay" class="speed-dating-status-overlay">
+                        <div id="speed-dating-status-text">Waiting for another nurse...</div>
+                        <div class="spinner hidden" id="speed-dating-spinner"></div>
+                    </div>
+                </div>
+                <div id="speed-dating-controls" class="speed-dating-controls">
+                    <button id="leave-room-btn" class="btn btn-tertiary">Leave Room</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Messages Page -->
+        <div id="messages-page" class="page hidden">
+            <div id="message-list-view">
+                <div class="page-header"><h2>Messages</h2></div>
+                <div class="search-bar-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="message-search-input" class="input" placeholder="Search matches...">
+                </div>
+                <div class="message-threads">
+                    <!-- Chatbot Thread -->
+                    <div class="message-thread-item" id="chatbot-thread">
+                        <img src="https://placehold.co/60x60/00bcd4/FFFFFF?text=AI" alt="Nurse Mingle Assistant">
+                        <div class="thread-info">
+                            <div class="thread-name">Nurse Mingle Assistant</div>
+                            <div class="thread-preview">Questions about the app? Ask me!</div>
+                        </div>
+                    </div>
+                    <!-- Threads are dynamically added here -->
+                    <p id="no-results-message" class="hidden">No matches found.</p>
+                </div>
+            </div>
+            <div id="chat-view" class="hidden">
+                <div class="chat-header">
+                    <button class="back-to-list-btn"><i class="fas fa-chevron-left"></i></button>
+                    <img src="https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Dr. Emily Carter" class="chat-avatar">
+                    <div class="chat-name">Dr. Emily Carter</div>
+                    <div class="chat-actions">
+                        <button id="video-call-btn" class="icon-btn"><i class="fas fa-video"></i></button>
+                        <button id="audio-call-btn" class="icon-btn"><i class="fas fa-phone"></i></button>
+                        <button id="more-chat-options-btn" class="icon-btn"><i class="fas fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+                <div class="chat-messages">
+                    <!-- Chat messages will be dynamically loaded here -->
+                </div>
+                <div class="chat-input-bar">
+                    <button id="gift-btn" class="icon-btn" aria-label="Send Gift"><i class="fas fa-gift"></i></button>
+                    <input type="text" id="chat-input" placeholder="Type a message...">
+                    <button id="send-btn" class="icon-btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vent & Vibe Page -->
+        <div id="vent-page" class="page hidden">
+            <div class="page-header">
+                <button class="back-btn" id="vent-back-btn"><i class="fas fa-chevron-left"></i></button>
+                <h2>Vent & Vibe</h2>
+            </div>
+            <div class="vent-page-content">
+                <div class="vent-post-form">
+                    <textarea id="vent-post-input" class="textarea" placeholder="Share a story, ask for advice, or just vent... (posts are anonymous)"></textarea>
+                    <button id="vent-post-submit" class="btn btn-primary">Post Anonymously</button>
+                </div>
+                <div id="vent-posts-container">
+                    <!-- Anonymous posts will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Gifts Page -->
+        <div id="gifts-page" class="page hidden">
+            <div class="page-header">
+              <button class="back-btn" id="gifts-back-btn"><i class="fas fa-chevron-left"></i></button>
+              <h2>Gifts</h2>
+              <div class="gift-points-display">
+                <i class="fas fa-coins"></i> <span id="gift-points-balance">0</span>
+              </div>
+            </div>
+            <div class="gifts-content-wrapper">
+                <div class="gift-section">
+                    <h3><i class="fas fa-parachute-box"></i> Acquire Gifts</h3>
+                    <p class="gift-section-desc">Get gifts with your points, by watching ads, or purchasing premium options. They'll be added to your inventory to send later!</p>
+                    <div class="gift-catalog-container">
+                        <h4>Free Gifts (Watch Ad)</h4>
+                        <div id="free-gifts-grid" class="gift-grid acquire"></div>
+                        <h4>Premium Gifts</h4>
+                        <div id="premium-gifts-grid" class="gift-grid acquire"></div>
+                    </div>
+                </div>
+                <div class="gift-section">
+                    <h3><i class="fas fa-box-open"></i> My Sendable Inventory</h3>
+                    <div id="sendable-inventory-grid" class="gift-inventory-grid"></div>
+                    <p id="empty-sendable-inventory-message" class="hidden">Acquire gifts to send them to your matches!</p>
+                </div>
+                <div class="gift-section">
+                    <h3><i class="fas fa-inbox"></i> Received Gifts</h3>
+                    <div id="received-inventory-grid" class="gift-inventory-grid"></div>
+                    <p id="empty-received-inventory-message" class="hidden">Gifts you receive will appear here!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profile-page" class="page hidden">
+          <h2>My Profile</h2>
+          <div class="profile-card">
+              <img id="profile-avatar" src="https://placehold.co/120x120/E1E1E1/BDBDBD?text=You" alt="Your Profile Picture" class="profile-avatar">
+              <h3 id="profile-name" class="profile-name">Your Name</h3>
+              <p id="profile-specialty" class="profile-specialty">Your Specialty | Your Location</p>
+              <button id="edit-profile-btn" class="btn btn-secondary btn-edit-profile">Edit Profile</button>
+          </div>
+           <div class="profile-section">
+              <h4>My Photos</h4>
+              <div id="my-photos-container" class="profile-view-photos">
+                  <!-- My photos will be rendered here -->
+              </div>
+          </div>
+          <div class="profile-section">
+              <h4>About Me</h4>
+              <p id="profile-about-text">Tell us a little about yourself...</p>
+          </div>
+          <div id="profile-prompts-container" class="profile-section">
+              <!-- Prompts will be rendered here -->
+          </div>
+          <div class="profile-section">
+              <h4>Interests</h4>
+              <div id="profile-interests-container" class="interests-container">
+                  <!-- Interests will be rendered here -->
+              </div>
+          </div>
+          <div class="profile-section">
+              <h4>Profile Badges</h4>
+              <div class="badges-container">
+                  <!-- Badges will be dynamically rendered here -->
+              </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page hidden">
+            <div class="page-header">
+                <button class="back-btn" id="dashboard-back-btn"><i class="fas fa-chevron-left"></i></button>
+                <h2>Dashboard</h2>
+            </div>
+            <div class="dashboard-content">
+                <div class="dashboard-grid">
+                    <div class="metric-card">
+                        <i class="fas fa-eye metric-icon"></i>
+                        <div class="metric-value" id="metric-profile-views">--</div>
+                        <div class="metric-label">Profile Views (7d)</div>
+                    </div>
+                    <div class="metric-card">
+                        <i class="fas fa-heart metric-icon"></i>
+                        <div class="metric-value" id="metric-likes-received">--</div>
+                        <div class="metric-label">Likes Received</div>
+                    </div>
+                    <div class="metric-card">
+                        <i class="fas fa-star metric-icon"></i>
+                        <div class="metric-value" id="metric-super-likes">--</div>
+                        <div class="metric-label">Super Likes Left</div>
+                    </div>
+                    <div class="metric-card">
+                        <i class="fas fa-coins metric-icon"></i>
+                        <div class="metric-value" id="metric-gift-points">--</div>
+                        <div class="metric-label">Gift Points</div>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <h4>Badge Progress</h4>
+                    <div id="dashboard-badge-progress">
+                        <!-- Badge progress will be rendered here -->
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <h4>Free Video Minutes</h4>
+                    <p class="gift-section-desc">Watch ads to earn free video minutes for calls and Speed Dating.</p>
+                    <div id="dashboard-video-minutes">
+                        <!-- Video minute progress will be rendered here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- "Likes You" Page -->
+        <div id="likes-you-page" class="page hidden">
+          <div class="page-header">
+              <button class="back-btn" id="likes-you-back-btn"><i class="fas fa-chevron-left"></i></button>
+              <h2>Who Likes You</h2>
+          </div>
+          <div id="likes-you-grid" class="likes-you-grid">
+              <!-- User cards will be dynamically inserted here -->
+          </div>
+          <div id="likes-you-premium-upsell" class="hidden">
+              <i class="fas fa-lock"></i>
+              <h3>See Who Likes You!</h3>
+              <p>Upgrade to premium to see all your admirers and match instantly.</p>
+              <button class="btn btn-primary">Upgrade Now</button>
+          </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div id="settings-page" class="page hidden">
+            <div class="page-header">
+                <button class="back-btn" id="settings-back-btn"><i class="fas fa-chevron-left"></i></button>
+                <h2>Settings</h2>
+            </div>
+            <div class="settings-content">
+                <div class="settings-section">
+                  <div class="settings-item">
+                    <div class="settings-item-info">
+                      <i class="fas fa-moon settings-icon"></i>
+                      <span>Dark Mode</span>
+                    </div>
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="dark-mode-toggle">
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="settings-menu">
+                    <button class="settings-item" id="goto-dashboard-btn">
+                        <i class="fas fa-chart-line settings-icon"></i>
+                        <span>Dashboard</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="settings-item" id="goto-vent-btn">
+                        <i class="fas fa-comments settings-icon"></i>
+                        <span>Vent & Vibe</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="settings-item" id="goto-filters-btn">
+                        <i class="fas fa-filter settings-icon"></i>
+                        <span>Discovery Filters</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="settings-item" id="goto-verification-btn">
+                      <i class="fas fa-check-circle settings-icon"></i>
+                      <span>Verification Center</span>
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="settings-item" id="goto-subscription-btn">
+                        <i class="fas fa-gem settings-icon"></i>
+                        <span>Subscription Plans</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                     <button class="settings-item" id="goto-edit-profile-btn">
+                        <i class="fas fa-user-edit settings-icon"></i>
+                        <span>Edit Profile</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="settings-item" id="goto-blocked-users-btn">
+                        <i class="fas fa-ban settings-icon"></i>
+                        <span>Blocked Users</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="settings-item" id="logout-btn" style="color: #ff4757; border-top: 1px solid #eee; margin-top: 20px;">
+                        <i class="fas fa-sign-out-alt settings-icon"></i>
+                        <span>Logout</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subscription Plans Page -->
+        <div id="subscription-page" class="page hidden">
+            <div class="page-header">
+                <button class="back-btn" id="subscription-back-btn"><i class="fas fa-chevron-left"></i></button>
+                <h2>Subscription Plans</h2>
+            </div>
+            <div class="subscription-content">
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3><i class="fas fa-star"></i> Nurse Mingle Plus</h3>
+                        <div class="plan-price">$9.99<span>/month</span></div>
+                    </div>
+                    <div class="plan-features">
+                        <div class="feature"><i class="fas fa-check"></i> Unlimited likes</div>
+                        <div class="feature"><i class="fas fa-check"></i> See who likes you</div>
+                        <div class="feature"><i class="fas fa-check"></i> 5 Super Likes per day</div>
+                        <div class="feature"><i class="fas fa-check"></i> Rewind last swipe</div>
+                        <div class="feature"><i class="fas fa-check"></i> Advanced filters</div>
+                    </div>
+                    <button class="btn btn-primary plan-btn">Choose Plan</button>
+                </div>
+
+                <div class="plan-card featured">
+                    <div class="plan-badge">Most Popular</div>
+                    <div class="plan-header">
+                        <h3><i class="fas fa-crown"></i> Nurse Mingle Premium</h3>
+                        <div class="plan-price">$19.99<span>/month</span></div>
+                    </div>
+                    <div class="plan-features">
+                        <div class="feature"><i class="fas fa-check"></i> Everything in Plus</div>
+                        <div class="feature"><i class="fas fa-check"></i> Unlimited video calling minutes</div>
+                        <div class="feature"><i class="fas fa-check"></i> Priority profile placement</div>
+                        <div class="feature"><i class="fas fa-check"></i> Weekly Super Boosts</div>
+                        <div class="feature"><i class="fas fa-check"></i> Read receipts</div>
+                        <div class="feature"><i class="fas fa-check"></i> Profile boost alerts</div>
+                    </div>
+                    <button class="btn btn-primary plan-btn">Choose Plan</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters Page -->
+        <div id="filters-page" class="page hidden">
+            <div class="page-header">
+                <button class="back-btn" id="filters-back-btn"><i class="fas fa-chevron-left"></i></button>
+                <h2>Discovery Filters</h2>
+            </div>
+            <div class="filters-content">
+                <div class="form-group">
+                  <div class="toggle-switch-container">
+                    <label for="online-now-toggle">Online Now</label>
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="online-now-toggle">
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                  <p class="filter-sub-label">See who is currently active.</p>
+                </div>
+                <div class="form-group">
+                    <div class="age-label">
+                      <label for="filter-age-slider">Age Range</label>
+                      <span id="filter-age-value">18 - 40</span>
+                    </div>
+                    <div class="range-slider-container">
+                        <input type="range" id="filter-age-min" class="slider" min="18" max="99" value="18">
+                        <input type="range" id="filter-age-max" class="slider" min="18" max="99" value="40">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="age-label">
+                      <label for="filter-distance-slider">Maximum Distance</label>
+                      <span id="filter-distance-value">50 km</span>
+                    </div>
+                    <input type="range" id="filter-distance-slider" class="slider" min="1" max="500" value="50">
+                </div>
+                 <div class="form-group">
+                    <label>Interests</label>
+                    <div class="interests-container">
+                      <button type="button" class="interest-tag active">Hiking</button>
+                      <button type="button" class="interest-tag">Travel</button>
+                      <button type="button" class="interest-tag active">Cooking</button>
+                      <button type="button" class="interest-tag">Movies</button>
+                      <button type="button" class="interest-tag">Reading</button>
+                      <button type="button" class="interest-tag active">Fitness</button>
+                      <button type="button" class="interest-tag">Music</button>
+                      <button type="button" class="interest-tag">Art</button>
+                    </div>
+                </div>
+                <div class="premium-filters-section">
+                  <h4>Premium Filters <i class="fas fa-gem"></i></h4>
+                   <div class="form-group">
+                      <label for="shift-preference">Shift Preference</label>
+                      <select id="shift-preference" class="input">
+                          <option>Any</option>
+                          <option>Mostly Days</option>
+                          <option>Mostly Nights</option>
+                          <option>Rotating</option>
+                      </select>
+                   </div>
+                   <div class="form-group">
+                      <label for="relationship-intention">Relationship Intention</label>
+                      <select id="relationship-intention" class="input">
+                          <option>Open to all</option>
+                          <option>Something serious</option>
+                          <option>Something casual</option>
+                          <option>Figuring it out</option>
+                      </select>
+                   </div>
+                </div>
+                <button class="btn btn-primary">Apply Filters</button>
+            </div>
+        </div>
+
+        <!-- Blocked Users Page -->
+        <div id="blocked-users-page" class="page hidden">
+            <div class="page-header">
+                <button class="back-btn" id="blocked-users-back-btn"><i class="fas fa-chevron-left"></i></button>
+                <h2>Blocked Users</h2>
+            </div>
+            <div id="blocked-users-list" class="blocked-users-list">
+                <!-- Blocked users will be dynamically inserted here -->
+            </div>
+            <p id="empty-blocked-list-message" class="hidden">You haven't blocked anyone yet.</p>
+        </div>
+
+      </main>
+
+      <nav id="bottom-nav">
+        <button class="nav-btn active" data-page="home-page" aria-label="Home"><i class="fas fa-home"></i></button>
+        <button class="nav-btn" data-page="speed-dating-page" aria-label="Speed Dating"><i class="fas fa-bolt-lightning"></i></button>
+        <button class="nav-btn" data-page="gifts-page" aria-label="Gifts"><i class="fas fa-gift"></i></button>
+        <button class="nav-btn" data-page="messages-page" aria-label="Messages"><i class="fas fa-envelope"></i></button>
+        <button class="nav-btn" data-page="profile-page" aria-label="Profile"><i class="fas fa-user"></i></button>
+      </nav>
+    </div>
+
+    <!-- User Profile View (Modal-like Page) -->
+    <div id="user-profile-view" class="page hidden">
+        <div class="page-header">
+            <button class="back-btn" id="user-profile-back-btn"><i class="fas fa-chevron-left"></i></button>
+            <h2 id="user-profile-view-name">User Profile</h2>
+        </div>
+        <div class="profile-view-content">
+            <!-- Content will be injected by JS -->
+        </div>
+        <div class="profile-view-actions">
+            <button id="user-profile-message-btn" class="btn btn-primary"><i class="fas fa-envelope"></i> Message</button>
+        </div>
+    </div>
+
+    <!-- Daily Reward Modal -->
+    <div id="daily-reward-modal" class="modal-backdrop hidden">
+      <div class="daily-reward-content">
+        <h2 id="daily-reward-title">Daily Login Reward!</h2>
+        <p id="daily-reward-subtitle">Come back tomorrow for a better reward!</p>
+        <div id="daily-reward-item">
+          <!-- Reward item will be injected here -->
+        </div>
+        <button id="claim-reward-btn" class="btn btn-primary">Claim</button>
+      </div>
+    </div>
+
+    <!-- Verification Modal -->
+    <div id="verification-modal" class="modal-backdrop hidden">
+      <div class="verification-content card">
+          <button class="close-modal-btn" aria-label="Close"><i class="fas fa-times"></i></button>
+          <h2><i class="fas fa-check-circle"></i> Verification Center</h2>
+          
+          <div id="verification-unverified">
+              <p>Become a Verified Nurse to build trust and get more matches!</p>
+              <div class="verification-status">
+                  <strong>Your Status:</strong> <span class="status-unverified">Not Verified</span>
+              </div>
+              <p class="verification-desc">Upload a clear photo of your professional ID. Your face and name must be visible. Other sensitive information can be covered.</p>
+              <img id="verification-preview" class="hidden" alt="ID Preview"/>
+              <div class="button-group">
+                <label for="verification-upload" class="btn btn-secondary">Upload ID</label>
+                <input type="file" id="verification-upload" class="hidden-input" accept="image/*">
+                <button id="verification-submit" class="btn btn-primary hidden">Submit for Review</button>
+              </div>
+          </div>
+          
+          <div id="verification-pending" class="hidden">
+              <div class="verification-status">
+                  <strong>Your Status:</strong> <span class="status-pending">Pending Review</span>
+              </div>
+              <p>Your ID has been submitted. We'll notify you once the review is complete (usually within 24 hours).</p>
+          </div>
+          
+          <div id="verification-verified" class="hidden">
+               <div class="verification-status">
+                  <strong>Your Status:</strong> <span class="status-verified">Verified!</span>
+              </div>
+              <p>The verified badge is now displayed on your profile. Thanks for helping keep our community safe!</p>
+          </div>
+      </div>
+    </div>
+
+    <!-- Send Gift Modal -->
+    <div id="send-gift-modal" class="modal-backdrop hidden">
+      <div class="gift-catalog-content">
+        <button class="close-modal-btn" aria-label="Close"><i class="fas fa-times"></i></button>
+        <h2>Send a Gift from Inventory</h2>
+        <div id="send-gift-inventory-grid" class="gift-grid">
+            <!-- Sendable gifts will be dynamically populated here -->
+        </div>
+        <p id="empty-send-gift-inventory-message" class="hidden">You have no gifts to send. Go to the Gifts page to acquire some!</p>
+      </div>
+    </div>
+
+    <!-- It's a Match! Modal -->
+    <div id="match-modal" class="hidden">
+        <div class="match-modal-content">
+            <h2 class="match-title">It's a Match!</h2>
+            <p class="match-subtitle">You and <span id="match-name"></span> have liked each other.</p>
+            <div class="match-avatars">
+                <img src="https://placehold.co/120x120/E1E1E1/BDBDBD?text=You" alt="Your avatar">
+                <img id="match-avatar" src="https://placehold.co/120x120/fbc02d/8a6500?text=Them" alt="Matched user's avatar">
+            </div>
+
+            <div class="icebreaker-section">
+                <h3>Break the Ice!</h3>
+                <p>Let our AI help you start the conversation.</p>
+                <button id="generate-icebreakers-btn" class="btn btn-secondary">✨ Generate Icebreakers</button>
+                <div id="icebreakers-result" class="icebreakers-result">
+                    <!-- AI suggestions will be loaded here -->
+                </div>
+            </div>
+
+            <div class="match-modal-actions">
+                <button id="match-send-message-btn" class="btn btn-primary">Send a Message</button>
+                <button id="keep-swiping-btn" class="btn-tertiary">Keep Swiping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="hidden">
+      <div class="edit-profile-content card">
+        <button class="close-edit-modal-btn close-modal-btn" aria-label="Close"><i class="fas fa-times"></i></button>
+        <h2>Edit Your Profile</h2>
+        <form id="edit-profile-form">
+           <div class="avatar-uploader">
+            <label for="edit-avatar-upload" class="avatar-label">
+              <img id="edit-avatar-preview" src="data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='120' height='120' fill='%23ffffff'/%3E%3C/svg%3E" alt="Avatar preview">
+              <span>Change Photo</span>
+            </label>
+            <input type="file" id="edit-avatar-upload" accept="image/*" class="hidden-input">
+          </div>
+          <div class="form-group">
+            <label>Additional Photos</label>
+            <div class="additional-photos-grid">
+              <!-- Slot 1 -->
+              <label for="photo-upload-1" class="photo-upload-slot">
+                <img id="photo-preview-1" src="data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3C/svg%3E" alt="Photo 1">
+              </label>
+              <input type="file" id="photo-upload-1" accept="image/*" class="hidden-input">
+              <!-- Slot 2 -->
+              <label for="photo-upload-2" class="photo-upload-slot">
+                <img id="photo-preview-2" src="data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3C/svg%3E" alt="Photo 2">
+              </label>
+              <input type="file" id="photo-upload-2" accept="image/*" class="hidden-input">
+              <!-- Slot 3 -->
+              <label for="photo-upload-3" class="photo-upload-slot">
+                <img id="photo-preview-3" src="data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100' height='100' fill='%23ffffff'/%3E%3C/svg%3E" alt="Photo 3">
+              </label>
+              <input type="file" id="photo-upload-3" accept="image/*" class="hidden-input">
+            </div>
+          </div>
+           <div class="form-group">
+              <label for="edit-full-name">Full Name</label>
+              <input type="text" id="edit-full-name" class="input" placeholder="e.g., Dr. Jessica Ray" required>
+          </div>
+          <div class="form-group">
+            <label for="edit-about">About Me</label>
+            <textarea id="edit-about" class="textarea" placeholder="Tell us a little about yourself..." rows="4"></textarea>
+          </div>
+           <div class="form-group">
+              <label for="edit-profile-prompt-1">My favorite way to de-stress after a 12-hour shift is...</label>
+              <input type="text" id="edit-profile-prompt-1" class="input" placeholder="e.g., a good book and a cup of tea.">
+            </div>
+            <div class="form-group">
+              <label for="edit-profile-prompt-2">A patient story I'll never forget is...</label>
+              <input type="text" id="edit-profile-prompt-2" class="input" placeholder="Share a short, anonymous story.">
+            </div>
+          <div class="form-group">
+            <div class="age-label">
+              <label for="edit-age-slider">Age</label>
+              <span id="edit-age-value">25</span>
+            </div>
+            <input type="range" id="edit-age-slider" class="slider" min="18" max="99" value="25">
+          </div>
+          <div class="form-group">
+            <label for="edit-specialty">Nursing Specialty</label>
+            <select id="edit-specialty" class="input">
+                <option>Cardiology</option>
+                <option>Pediatrics</option>
+                <option>Emergency Room (ER)</option>
+                <option>Intensive Care (ICU)</option>
+                <option>Surgery</option>
+                <option>Oncology</option>
+                <option>General Practice</option>
+                <option>Anesthesia</option>
+                <option>Dermatology</option>
+                <option>Endocrinology</option>
+                <option>Gastroenterology</option>
+                <option>Geriatrics</option>
+                <option>Hematology</option>
+                <option>Infectious Disease</option>
+                <option>Mental Health/Psychiatry</option>
+                <option>Nephrology</option>
+                <option>Neurology</option>
+                <option>Obstetrics & Gynecology</option>
+                <option>Orthopedics</option>
+                <option>Palliative Care</option>
+                <option>Pulmonology</option>
+                <option>Radiology</option>
+                <option>Rehabilitation</option>
+                <option>Rheumatology</option>
+                <option>Transplant</option>
+                <option>Trauma</option>
+                <option>Urology</option>
+                <option>Wound Care</option>
+                <option>Home Health</option>
+                <option>School Nursing</option>
+                <option>Occupational Health</option>
+                <option>Flight Nursing</option>
+                <option>Certified Nursing Assistant (CNA)</option>
+                <option>Licensed Practical Nurse (LPN)</option>
+                <option>Nurse Practitioner (NP)</option>
+                <option>Clinical Nurse Specialist</option>
+                <option>Nurse Educator</option>
+                <option>Nurse Administrator</option>
+                <option>Other</option>
+            </select>
+          </div>
+           <div class="form-group">
+            <label for="edit-location">Location</label>
+            <input type="text" id="edit-location" class="input" placeholder="e.g., London, UK">
+          </div>
+          <div class="form-group">
+            <label>Interests</label>
+            <div class="interests-container">
+              <button type="button" class="interest-tag">Hiking</button>
+              <button type="button" class="interest-tag">Travel</button>
+              <button type="button" class="interest-tag">Cooking</button>
+              <button type="button" class="interest-tag">Movies</button>
+              <button type="button" class="interest-tag">Reading</button>
+              <button type="button" class="interest-tag">Fitness</button>
+              <button type="button" class="interest-tag">Music</button>
+              <button type="button" class="interest-tag">Art</button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Boost Modal -->
+    <div id="boost-modal" class="modal-backdrop hidden">
+      <div class="boost-modal-content">
+        <button class="close-modal-btn" aria-label="Close"><i class="fas fa-times"></i></button>
+        <h2><i class="fas fa-bolt"></i> Boost Your Profile</h2>
+        <p>Get seen by more people in your area. Watch ads to earn a free boost!</p>
+        <div class="boost-options">
+            <div class="boost-option" data-duration="15" data-ads="3">
+                <button class="btn btn-secondary">
+                    <div>15 Minutes</div>
+                    <small>Watch 3 Ads</small>
+                </button>
+            </div>
+            <div class="boost-option" data-duration="60" data-ads="8">
+                <button class="btn btn-secondary">
+                    <div>1 Hour</div>
+                    <small>Watch 8 Ads</small>
+                </button>
+            </div>
+             <div class="boost-option" data-duration="120" data-ads="12">
+                <button class="btn btn-secondary">
+                    <div>2 Hours</div>
+                    <small>Watch 12 Ads</small>
+                </button>
+            </div>
+        </div>
+        <button id="close-boost-modal-btn-bottom" class="btn-tertiary">Back</button>
+      </div>
+    </div>
+
+    <!-- Watch Ad Modal -->
+    <div id="watch-ad-modal" class="modal-backdrop hidden">
+        <div class="watch-ad-content">
+            <h2 id="watch-ad-title">Earning Your Boost...</h2>
+            <div class="ad-placeholder">
+                <i class="fas fa-play-circle"></i>
+                <p>Your ad is playing</p>
+            </div>
+            <p id="watch-ad-counter">Watching ad 1 of 3</p>
+            <div class="progress-bar-bg">
+                <div id="watch-ad-progress" class="progress-bar-fill"></div>
+            </div>
+            <button id="skip-ad-btn" class="btn-tertiary">Skip Ad</button>
+        </div>
+    </div>
+
+    <!-- Stripe Checkout Modal -->
+    <div id="stripe-checkout-modal" class="hidden">
+      <div id="stripe-checkout-content" class="stripe-checkout-content">
+        <button class="close-modal-btn" aria-label="Close"><i class="fas fa-times"></i></button>
+        <h2>Complete Your Purchase</h2>
+        <div class="stripe-order-summary">
+            <span id="stripe-gift-icon"></span>
+            <div class="stripe-gift-details">
+                <span id="stripe-gift-name">Gift Name</span>
+                <span>1 x <span id="stripe-gift-price">$0.00</span></span>
+            </div>
+        </div>
+        <form id="stripe-payment-form">
+            <div class="form-group">
+                <label>Card Information</label>
+                <div class="stripe-card-input">
+                    <i class="fab fa-cc-visa"></i>
+                    <input type="text" value="•••• •••• •••• 4242" disabled>
+                    <input type="text" value="12 / 25" disabled>
+                    <input type="text" value="CVC" disabled>
+                </div>
+            </div>
+            <button type="submit" id="stripe-pay-btn" class="btn btn-primary">
+                <span class="btn-text">Pay</span>
+                <div class="spinner hidden"></div>
+            </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Call View -->
+    <div id="call-view" class="hidden">
+        <video id="remote-video" autoplay playsinline></video>
+        <video id="local-video" autoplay playsinline muted></video>
+        <div class="call-overlay">
+            <div class="call-header-info">
+                <img id="call-avatar" src="" alt="Avatar">
+                <div id="call-name"></div>
+                <div id="call-status">Connecting...</div>
+                <div id="call-timer-overlay"></div>
+            </div>
+            <div id="call-controls">
+                <button id="toggle-mic-btn" class="call-control-btn"><i class="fas fa-microphone"></i></button>
+                <button id="toggle-video-btn" class="call-control-btn"><i class="fas fa-video"></i></button>
+                <button id="end-call-btn" class="call-control-btn end-call"><i class="fas fa-phone"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Options Modal -->
+    <div id="chat-options-modal" class="hidden">
+        <div class="chat-options-content">
+            <button id="block-user-btn" class="chat-option-btn"><i class="fas fa-ban"></i> Block User</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification"></div>
+
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "nurse mingle",
+  "description": "A dating application ",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

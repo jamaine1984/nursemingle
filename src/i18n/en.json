@@ -1,0 +1,128 @@
+{
+  "app": {
+    "name": "Nurse Mingle",
+    "tagline": "Connecting Healthcare Heroes",
+    "findLove": "Find Love"
+  },
+  "auth": {
+    "welcome": "Welcome to Nurse Mingle",
+    "createAccount": "Create Account",
+    "signIn": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot Password?",
+    "signUp": "Sign Up",
+    "login": "Login",
+    "logout": "Logout",
+    "pleaseSignIn": "Please sign in first"
+  },
+  "profile": {
+    "setup": "Profile Setup",
+    "fullName": "Full Name",
+    "age": "Age",
+    "specialty": "Nursing Specialty",
+    "location": "Location",
+    "about": "About Me",
+    "interests": "Interests",
+    "saveProfile": "Save Profile",
+    "uploadPhoto": "Upload Photo",
+    "editProfile": "Edit Profile"
+  },
+  "specialties": {
+    "icu": "ICU/Critical Care",
+    "emergency": "Emergency/Trauma",
+    "pediatric": "Pediatric",
+    "oncology": "Oncology",
+    "cardiac": "Cardiac",
+    "maternity": "Maternity/Labor & Delivery",
+    "or": "Operating Room",
+    "anesthesia": "Anesthesia",
+    "psychiatric": "Psychiatric/Mental Health",
+    "geriatric": "Geriatric",
+    "homeHealth": "Home Health",
+    "rehabilitation": "Rehabilitation",
+    "dialysis": "Dialysis",
+    "infection": "Infection Control",
+    "other": "Other"
+  },
+  "navigation": {
+    "home": "Home",
+    "likes": "Likes",
+    "messages": "Messages",
+    "speedDating": "Speed Dating",
+    "gifts": "Gifts",
+    "profile": "Profile"
+  },
+  "matching": {
+    "like": "Like",
+    "pass": "Pass",
+    "superLike": "Super Like",
+    "itsAMatch": "It's a Match!",
+    "startChatting": "Start Chatting",
+    "keepSwiping": "Keep Swiping",
+    "noMoreProfiles": "No more profiles to swipe!",
+    "checkBackLater": "Check back later for new people."
+  },
+  "messages": {
+    "sendMessage": "Send Message",
+    "typeMessage": "Type a message...",
+    "online": "Online",
+    "lastSeen": "Last seen",
+    "noMessages": "No messages yet",
+    "startConversation": "Start a conversation!"
+  },
+  "gifts": {
+    "sendGift": "Send Gift",
+    "freeGifts": "Free Gifts",
+    "premiumGifts": "Premium Gifts",
+    "giftSent": "Gift Sent!",
+    "watchAdForGift": "Watch Ad for Free Gift",
+    "giftPoints": "Gift Points"
+  },
+  "speedDating": {
+    "joinRoom": "Join Room",
+    "createRoom": "Create Room",
+    "duration": "Duration",
+    "participants": "Participants",
+    "startSession": "Start Session",
+    "endSession": "End Session",
+    "nextMatch": "Next Match",
+    "rateExperience": "Rate Experience"
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "error": "Error",
+    "success": "Success",
+    "minutes": "minutes",
+    "hours": "hours",
+    "days": "days",
+    "weeks": "weeks",
+    "months": "months",
+    "years": "years"
+  },
+  "errors": {
+    "networkError": "Network error. Please check your connection.",
+    "permissionDenied": "Permission denied. Please try again.",
+    "serviceUnavailable": "Service temporarily unavailable.",
+    "invalidInput": "Please check your input and try again.",
+    "uploadFailed": "Upload failed. Please try again.",
+    "somethingWrong": "Something went wrong. Please try again."
+  },
+  "accessibility": {
+    "profileImage": "Profile image",
+    "menuButton": "Menu button",
+    "closeButton": "Close button",
+    "likeButton": "Like this profile",
+    "passButton": "Pass on this profile",
+    "superLikeButton": "Super like this profile",
+    "sendMessageButton": "Send message button",
+    "uploadImageButton": "Upload image button"
+  }
+}
